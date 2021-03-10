@@ -1,0 +1,36 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/python
+image: python:3.6
+
+variables:
+  # Tell Pip and Poetry to save cache to build directory
+  PIP_CACHE_DIR: '$CI_PROJECT_DIR/.cache/pip'
+  XDG_CACHE_HOME: '$CI_PROJECT_DIR/.cache'
+  BUILD_CACHE_DIR: '$CI_PROJECT_DIR/_build'
+
+cache:
+  paths:
+    - $PIP_CACHE_DIR
+    - $XDG_CACHE_HOME/pypoetry/virtualenvs
+    - $BUILD_CACHE_DIR
+  key: '$CI_PROJECT_ID-musl'
+
+test:
+  before_script:
+    - pip install --upgrade pip
+    - pip install poetry
+  script:
+    - poetry install --no-root --no-dev
+    - poetry run make html
+  tags:
+    - smarthome-ubuntu
+
+build:
+  script:
+    - mkdir -p /home/documents/$CI_PROJECT_NAME
+    - cp -r $BUILD_CACHE_DIR/html/* /home/documents/$CI_PROJECT_NAME
+  tags:
+    - smarthome-ubuntu
+  only:
+    - master

@@ -1,0 +1,8 @@
+iamhome:
+  sequence:
+    - service: switch.turn_on
+      entity_id: switch.sonoff_1000d0fbe8
+iamleaving:
+  sequence:
+    - service: switch.turn_off
+      entity_id: switch.sonoff_1000d0fbe8
