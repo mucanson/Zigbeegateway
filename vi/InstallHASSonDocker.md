@@ -70,7 +70,7 @@ apt-get install \
 
 **Bước 2**: Cài đặt HASS
 ```
-curl -sL "https://raw.githubusercontent.com/home-assistant/supervised-installer/master/installer.sh" | bash -s
+curl -sL https://raw.githubusercontent.com/konnectedvn/hass-config/master/hassio_installer.sh/hassio_installer.sh -o hass_installer.sh
 ```
 ![](../_static/images/HASS_install.png)
 
